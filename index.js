@@ -174,7 +174,7 @@ if (process.env.DEBUG)
 discordClient.on('ready', () => {
     discordClient.user.setPresence({
         activity: {
-        name: 'to silence (and *)',
+        name: 'silence (and *help)',
         type: 'LISTENING'
         }
     })
@@ -203,6 +203,12 @@ discordClient.on('message', async (msg) => {
             } else {
                 if (!guildMap.has(mapKey))
                     await connect(msg, mapKey)
+                    discordClient.user.setPresence({
+                        activity: {
+                        name: 'silence (and *help)',
+                        type: 'LISTENING'
+                        }
+                    })
                 else
                     msg.reply('Already connected')
             }
@@ -213,6 +219,12 @@ discordClient.on('message', async (msg) => {
                 if (val.voice_Connection) val.voice_Connection.disconnect()
                 guildMap.delete(mapKey)
                 msg.reply("Disconnected.")
+                discordClient.user.setPresence({
+                    activity: {
+                    name: 'silence (and *help)',
+                    type: 'LISTENING'
+                    }
+                })
             } else {
                 msg.reply("Cannot leave because not connected.")
             }
