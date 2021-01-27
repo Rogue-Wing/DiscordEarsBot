@@ -172,13 +172,6 @@ const discordClient = new Discord.Client()
 if (process.env.DEBUG)
     discordClient.on('debug', console.debug);
 discordClient.on('ready', () => {
-    bot.user.setPresence({
-    status: 'online',
-    activity: {
-        name: 'to your voice (and *)',
-        type: 'LISTENING'
-        }
-    })
     console.log(`Logged in as ${discordClient.user.tag}!`)
 })
 discordClient.login(DISCORD_TOK)
@@ -204,6 +197,12 @@ discordClient.on('message', async (msg) => {
             } else {
                 if (!guildMap.has(mapKey))
                     await connect(msg, mapKey)
+                    bot.user.setPresence({
+                        activity: {
+                        name: 'to your voice (and *)',
+                        type: 'LISTENING'
+                        }
+                    })
                 else
                     msg.reply('Already connected')
             }
@@ -214,6 +213,12 @@ discordClient.on('message', async (msg) => {
                 if (val.voice_Connection) val.voice_Connection.disconnect()
                 guildMap.delete(mapKey)
                 msg.reply("Disconnected.")
+                bot.user.setPresence({
+                    activity: {
+                    name: 'to silence (and *)',
+                    type: 'LISTENING'
+                    }
+                })
             } else {
                 msg.reply("Cannot leave because not connected.")
             }
