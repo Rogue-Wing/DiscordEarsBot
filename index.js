@@ -202,13 +202,13 @@ discordClient.on('message', async (msg) => {
                 msg.reply('Error: please join a voice channel first.')
             } else {
                 if (!guildMap.has(mapKey))
-                    await connect(msg, mapKey)
                     discordClient.user.setPresence({
                         activity: {
                         name: 'silence (and *help)',
                         type: 'LISTENING'
                         }
                     })
+                    await connect(msg, mapKey)
                 else
                     msg.reply('Already connected')
             }
