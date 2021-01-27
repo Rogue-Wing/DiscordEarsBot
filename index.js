@@ -172,6 +172,13 @@ const discordClient = new Discord.Client()
 if (process.env.DEBUG)
     discordClient.on('debug', console.debug);
 discordClient.on('ready', () => {
+    bot.user.setPresence({
+    status: 'online',
+    activity: {
+        name: 'to your voice (and *)',
+        type: 'LISTENING'
+        }
+    })
     console.log(`Logged in as ${discordClient.user.tag}!`)
 })
 discordClient.login(DISCORD_TOK)
