@@ -197,12 +197,6 @@ discordClient.on('message', async (msg) => {
             } else {
                 if (!guildMap.has(mapKey))
                     await connect(msg, mapKey)
-                    bot.user.setPresence({
-                        activity: {
-                        name: 'to your voice (and *)',
-                        type: 'LISTENING'
-                        }
-                    })
                 else
                     msg.reply('Already connected')
             }
