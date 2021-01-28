@@ -174,7 +174,7 @@ if (process.env.DEBUG)
 discordClient.on('ready', () => {
     discordClient.user.setPresence({
         activity: {
-        name: 'your voice | *help)',
+        name: 'your voice | *help',
         type: 'LISTENING'
         }
     })
